@@ -1,0 +1,14 @@
+{
+  "name": "s3-lambda-transcribe-audio-to-text-s3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "package": "aws cloudformation package --template-file template.yml --output-template-file output.yml --s3-bucket app-repo-components",
+    "deploy": "aws cloudformation deploy --template-file output.yml --stack-name s3-lambda-transcribe-audio-to-text-s3 --capabilities CAPABILITY_IAM",
+    "qd": "npm run package && npm run deploy"
+  },
+  "keywords": ["serverless", "audio", "text"],
+  "author": "Aleksandar Simovic <alexander.simovic@gmail.com>",
+  "license": "MIT"
+}
