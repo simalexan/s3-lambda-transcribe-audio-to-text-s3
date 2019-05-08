@@ -15,7 +15,6 @@ This is a serverless component that takes uploaded MP3, MP4, WAV, FLAC audio fil
 
 This component has one CloudFormation deployment parameter:
 
-- `ConversionTimeout`, an optional parameter, represents the timeout of the Conversion Lambda function. By default it's 180 seconds.
 - `LanguageCode`, a required parameter, represents the language present in the audio file that the AWS Transcribe should detect. Possible values are:
 'en-US','es-US','en-AU','fr-CA','en-GB','de-DE','pt-BR','fr-FR','it-IT','ko-KR','es-ES'
 
