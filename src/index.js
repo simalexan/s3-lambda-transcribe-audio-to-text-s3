@@ -4,28 +4,33 @@ const AWS = require('aws-sdk'),
   LANGUAGE_CODE = process.env.LANGUAGE_CODE,
   OUTPUT_BUCKET = process.env.OUTPUT_BUCKET;
 
-exports.handler = async (event, context) => {
+exports.handler = (event, context) => {
   const eventRecord = event.Records && event.Records[0],
     inputBucket = eventRecord.s3.bucket.name,
     key = eventRecord.s3.object.key,
-    id = context.awsRequestId,
-    extension = path.extname(key);
+    id = context.awsRequestId;
+
+  let extension = path.extname(key);
+  extension = extension.substr(1, extension.length);
 
   console.log('converting from ', `https://${inputBucket}.s3.amazonaws.com/${key}`, extension);
 
-  if (['mp3', 'mp4', 'wav', 'flac'].includes(extension)) {
-    throw new Error('Invalid file extension, the only supported AWS Transcribe file types are MP3, MP4, WAV, FLAC.')
+  if (!['mp3', 'mp4', 'wav', 'flac'].includes(extension)) {
+    throw 'Invalid file extension, the only supported AWS Transcribe file types are MP3, MP4, WAV, FLAC.';
   }
+
+  const fileUri = `https://${inputBucket}.s3.amazonaws.com/${key}`,
+    jobName = `s3-lambda-audio-transcribe-${id}`;
 
   const params = {
     LanguageCode: LANGUAGE_CODE,
     Media: {
-      MediaFileUri: `https://${inputBucket}.s3.amazonaws.com/${key}`
+      MediaFileUri: fileUri
     },
     MediaFormat: extension,
-    TranscriptionJobName: `s3-lambda-audio-transcribe-${id}`,
+    TranscriptionJobName: jobName,
     OutputBucketName: OUTPUT_BUCKET
-  }
+  };
 
-  return await transcribe.startTranscriptionJob(params);
+  return transcribe.startTranscriptionJob(params).promise();
 };
