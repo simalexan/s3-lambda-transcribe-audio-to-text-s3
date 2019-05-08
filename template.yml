@@ -1,10 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
-Description: A serverless component for conversion from AAC,WAV to MP3
+Description: A serverless component for transcribing from MP3, MP4, WAV, FLAC to Text
 Parameters:
-  ConversionTimeout:
-    Type: Number
-    Default: 180
   LanguageCode:
     Type: String
     Description: 'The language code of your audio file'
@@ -26,7 +23,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      Timeout: !Ref ConversionTimeout
+      Timeout: 30
       MemorySize: 1024
       Runtime: nodejs8.10
       CodeUri: src/
