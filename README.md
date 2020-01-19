@@ -16,11 +16,21 @@ This is a serverless component that takes uploaded MP3, MP4, WAV, FLAC audio fil
 This component has one CloudFormation deployment parameter:
 
 - `LanguageCode`, a required parameter, represents the language present in the audio file that the AWS Transcribe should detect. Possible values are:
-'en-US','es-US','en-AU','fr-CA','en-GB','de-DE','pt-BR','fr-FR','it-IT','ko-KR','es-ES'
+  - 'en-US'
+  - 'es-US'
+  - 'en-AU'
+  - 'fr-CA'
+  - 'en-GB'
+  - 'de-DE'
+  - 'pt-BR'
+  - 'fr-FR'
+  - 'it-IT'
+  - 'ko-KR'
+  - 'es-ES'
 
-## Latest Release - 1.0.0
+## Latest Release - 1.1.0
 
-- Initial release.
+- Upgrading to Node.js 12.x LTS
 
 ## Roadmap - Upcoming changes
 
