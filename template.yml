@@ -25,7 +25,7 @@ Resources:
       Handler: index.handler
       Timeout: 30
       MemorySize: 1024
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       CodeUri: src/
       Policies:
       - S3CrudPolicy:
